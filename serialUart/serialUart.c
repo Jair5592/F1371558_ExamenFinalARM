@@ -45,6 +45,12 @@ int existeCaracter()
     return existeDato;                              // Retornar el valor de la variable existeDato ( 0 o 1).
 }
 
+uint8_t leerCaracter()
+{
+    while(!(existeCaracter()));                     // Monitorea el valor que devuelve la función existeCaracter(). 1-> Hay dato. 0-> No hay dato.
+    return USART1->DR & (0xFF);                     // Si algún dato a llegado, se retorna dicho valor, almacenado en el registro DR.
+}
+
 /*
 Implementar las funciones: 
 existeCaracter()
