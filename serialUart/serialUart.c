@@ -39,6 +39,12 @@ void enviarPalabra(uint8_t cadena[])
     nuevaLinea();
 }
 
+int existeCaracter()
+{
+    int existeDato = (USART1->SR & (1<<5));         // Guardar el estado del bit RXNE en la variable existeDato.
+    return existeDato;                              // Retornar el valor de la variable existeDato ( 0 o 1).
+}
+
 /*
 Implementar las funciones: 
 existeCaracter()
