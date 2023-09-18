@@ -580,6 +580,7 @@ typedef struct
 
 #define TIM2_BASE             (APB1PERIPH_BASE + 0x00000000UL)
 #define TIM3_BASE             (APB1PERIPH_BASE + 0x00000400UL)
+#define TIM4_BASE             (APB1PERIPH_BASE + 0x00000800UL)
 #define RTC_BASE              (APB1PERIPH_BASE + 0x00002800UL)
 #define WWDG_BASE             (APB1PERIPH_BASE + 0x00002C00UL)
 #define IWDG_BASE             (APB1PERIPH_BASE + 0x00003000UL)
@@ -636,6 +637,7 @@ typedef struct
 
 #define TIM2                ((TIM_TypeDef *)TIM2_BASE)
 #define TIM3                ((TIM_TypeDef *)TIM3_BASE)
+#define TIM4                ((TIM_TypeDef *)TIM4_BASE)
 #define RTC                 ((RTC_TypeDef *)RTC_BASE)
 #define WWDG                ((WWDG_TypeDef *)WWDG_BASE)
 #define IWDG                ((IWDG_TypeDef *)IWDG_BASE)
