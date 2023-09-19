@@ -26,6 +26,60 @@ void iniciarModulo()
     TIM4->CR1 |= ((1<<0)|(1<<7));                       // Habilita el contador y la precarga automática del valor de conteo.
 }
 
+void movimientoRecto(uint8_t vel)                       // Función que define el desplazamiento en línea recta, al avanzar o retroceder.
+{
+    if(vel == 1)
+    {
+        TIM4->CCR3 = ((TIM4->ARR) * 50) / 100;          // Si vel = 1, ciclo de trabajo = 50%.
+        TIM4->CCR4 = ((TIM4->ARR) * 50) / 100;
+    }
+    if(vel == 2)
+    {
+        TIM4->CCR3 = TIM4->ARR;                         // Si vel = 2, ciclo de trabajo = 100%.
+        TIM4->CCR4 = TIM4->ARR;
+    }
+    delay_ms(1000);                                     // Pausa de 1s.
+    TIM4->CCR3 = 0;                                     // Ciclo de trabajo = 0%. Para CC3 y CC4.
+    TIM4->CCR4 = 0;
+}
+
+void movimientoGiro()                                   // Función que define el desplazamiento realizado durante un giro a derecha o izquierda.
+{
+    TIM4->CCR3 = ((TIM4->ARR) * 50) / 100;              // Ciclo de trabajo = 50%.
+    TIM4->CCR4 = ((TIM4->ARR) * 50) / 100;
+    delay_ms(1000);                                     // Pausa de 1s.
+    TIM4->CCR3 = 0;                                     // Ciclo de trabajo = 0%. Para CC3 y CC4.
+    TIM4->CCR4 = 0;
+}
+
+void avanzar(uint8_t vel)
+{
+    GPIOA->ODR |= ((1<<5)|(1<<6));                      // Colocar PA5 y PA6 en alta.
+    GPIOA->ODR &= ~((1<<4)|(1<<7));                     // Colocar PA4 y PA7 en baja.
+    movimientoRecto(vel);     
+}
+
+void retroceder(uint8_t vel)
+{
+    GPIOA->ODR &= ~((1<<5)|(1<<6));                     // Colocar PA5 y PA6 en baja.
+    GPIOA->ODR |= ((1<<4)|(1<<7));                      // Colocar PA4 y PA7 en alta.
+    movimientoRecto(vel);
+}
+
+void girarDerecha()
+{
+    GPIOA->ODR &= ~((1<<5)|(1<<7));                     // Colocar PA5 y PA7 en baja.
+    GPIOA->ODR |= ((1<<4)|(1<<6));                      // Colocar PA4 y PA6 en alta.
+    movimientoGiro();
+}
+
+void girarIzquierda()
+{
+    GPIOA->ODR |= ((1<<5)|(1<<7));                      // Colocar PA5 y PA7 en alta.
+    GPIOA->ODR &= ~((1<<4)|(1<<6));                     // Colocar PA4 y PA6 en baja.
+    movimientoGiro();
+}
+
 
 /*
 Implementar el codigo fuente de las fuciones
