@@ -5,11 +5,5 @@ void inicializarUart(void);
 void enviarCaracter(uint8_t caracter);
 void nuevaLinea(void);
 void enviarPalabra(uint8_t cadena[]);
-int existeCaracter(void);
+uint8_t existeCaracter(void);
 uint8_t leerCaracter(void);
-
-/*
-Desarrollar el prototipo de las funciones: 
-existeCaracter()
-leerCaracter()
-*/

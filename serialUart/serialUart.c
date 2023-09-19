@@ -39,20 +39,14 @@ void enviarPalabra(uint8_t cadena[])
     nuevaLinea();
 }
 
-int existeCaracter()
+uint8_t existeCaracter()
 {
-    int existeDato = (USART1->SR & (1<<5));         // Guardar el estado del bit RXNE en la variable existeDato.
-    return existeDato;                              // Retornar el valor de la variable existeDato ( 0 o 1).
+    uint8_t existeDato = (USART1->SR & (1<<5));         // Guardar el estado del bit RXNE en la variable existeDato.
+    return existeDato;                                  // Retornar el valor de la variable existeDato ( 0 o 1).
 }
 
 uint8_t leerCaracter()
 {
-    while(!(existeCaracter()));                     // Monitorea el valor que devuelve la función existeCaracter(). 1-> Hay dato. 0-> No hay dato.
-    return USART1->DR & (0xFF);                     // Si algún dato a llegado, se retorna dicho valor, almacenado en el registro DR.
+    while(!(existeCaracter()));                         // Monitorea el valor que devuelve la función existeCaracter(). 1-> Hay dato. 0-> No hay dato.
+    return USART1->DR & (0xFF);                         // Si algún dato a llegado, se retorna dicho valor, almacenado en el registro DR.
 }
-
-/*
-Implementar las funciones: 
-existeCaracter()
-leerCaracter()
-*/

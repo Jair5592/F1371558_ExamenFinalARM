@@ -79,14 +79,3 @@ void girarIzquierda()
     GPIOA->ODR &= ~((1<<4)|(1<<6));                     // Colocar PA4 y PA6 en baja.
     movimientoGiro();
 }
-
-
-/*
-Implementar el codigo fuente de las fuciones
-iniciarModulo(),
-avanzar(),
-retroceder(),
-girarDerecha(),
-girarIzquierda()
-
-*/
