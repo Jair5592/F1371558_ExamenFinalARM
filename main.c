@@ -7,18 +7,18 @@
 
 int main(void)
 {
-	inicializarUart();
-	iniciarModulo();
-	TIM2_init();
+	inicializarUart();										// Se inicializa el módulo UART.
+	iniciarModulo();										// Se inicializan los módulos que controlarán el funcionamiento del driver de los motores.
+	TIM2_init();											// Se inicializa el módulo TIM2 para el uso de interrupciones.
 	uint8_t indicador = 0;
 	
 	while(1)
 	{
-		indicador = existeCaracter();
-		if(indicador == 1)
+		indicador = existeCaracter();						// Se almacena el valor devuelto por la función existeCaracter().
+		if(indicador == 1)									// Si ha llegado algún dato al microcontrolador, se almacena y se comprueba dicho valor.
 		{
 			uint8_t caracter = leerCaracter();
-			switch (caracter)
+			switch (caracter)								// Según el valor del dato recibido, se ejecuta algún movimiento en los motores.
 			{
 			case 'a':
 				avanzar(1);
@@ -44,7 +44,7 @@ int main(void)
 				girarIzquierda();
 				break;
 			
-			default:
+			default:										// Si el dato recibido no es válido, no se ejecuta ninguna acción.
 				break;
 			}
 		}
